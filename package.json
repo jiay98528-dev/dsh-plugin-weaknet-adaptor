@@ -1,0 +1,64 @@
+{
+  "name": "dsh-plugin-weaknet-adaptor",
+  "version": "1.0.0",
+  "description": "Weak-network adaptor for the DeepSeek Harness: transparent long-backoff model-stream retries (10-min cap), local response replay cache, heartbeat auto-reconnect, degraded-mode token economy, and a bilingual (zh/en) settings page. / 弱网适配插件：模型流长退避重试、本地响应缓存、心跳自动重连（默认 10 分钟封顶）、降级省 token、双语设置页。",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "weak-network",
+    "resilience",
+    "retry",
+    "heartbeat",
+    "reconnect",
+    "cache",
+    "token-economy"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "remote"
+      ]
+    }
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@deepseek-ai/dsh-typert-protocol": "^0.1.0-rc.6"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-agent": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-fs": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-llm": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-sandbox-policy": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-session": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-tool-result-pruner": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-web": "^0.1.0-rc.6"
+  },
+  "scripts": {
+    "check": "node --check lib/index.js && node --check lib/client.js",
+    "pack": "npm pack"
+  }
+}
