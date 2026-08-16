@@ -2,6 +2,16 @@
 
 All notable changes to **dsh-plugin-weaknet-adaptor**.
 
+## [1.0.5] — 2026-08-16
+
+### Fixed / 修复
+
+- **Settings RPC returned HTTP 404** (`/api/weaknet/getParamDefs`) — 设置页 RPC 返回 404。
+  - Root cause: the host `typertGateway` matches `/api` endpoints through cached SRC claims collected with `ctx.get(serviceKey)` — the weaknet service lives in this plugin's own fiber, which is **invisible to the gateway's sibling fiber**, so the endpoint was never claimed and the shared `/api` channel fell through to 404.
+  - 根因：host 端 typertGateway 通过 `ctx.get(serviceKey)` 收集 SRC claims 来匹配 `/api` endpoint——weaknet 服务注册在插件自身 fiber，对 gateway 的兄弟 fiber **不可见**，endpoint 从未被认领，共享 `/api` 通道回退 404。
+  - Fix: the host half now registers a **dedicated RPC channel** `/weaknet` via the public `ctx.connection.rpc.handle(...)` API and dispatches the five endpoints itself (`dispatchRpc`); the browser half calls `ctx.connection.rpc.call('/weaknet', method, { args })`. No dependency on gateway claims or namespace-service visibility.
+  - 修复：host 半通过公开 API `ctx.connection.rpc.handle(...)` 注册**专用 RPC 通道** `/weaknet` 并自行分派五个 endpoint（`dispatchRpc`）；浏览器半调用 `ctx.connection.rpc.call('/weaknet', method, { args })`。完全不再依赖 gateway claims 或命名空间服务可见性。
+
 ## [1.0.4] — 2026-08-16
 
 ### Fixed / 修复

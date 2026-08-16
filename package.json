@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-weaknet-adaptor",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Weak-network adaptor for the DeepSeek Harness: transparent long-backoff model-stream retries (10-min cap), local response replay cache, heartbeat auto-reconnect, degraded-mode token economy, and a bilingual (zh/en) settings page. / 弱网适配插件：模型流长退避重试、本地响应缓存、心跳自动重连（默认 10 分钟封顶）、降级省 token、双语设置页。",
   "keywords": [
     "dsh",
