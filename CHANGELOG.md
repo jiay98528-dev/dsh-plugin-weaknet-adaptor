@@ -2,6 +2,16 @@
 
 All notable changes to **dsh-plugin-weaknet-adaptor**.
 
+## [1.0.4] — 2026-08-16
+
+### Fixed / 修复
+
+- **Settings page parameters never loaded ("loading…" forever)** — 设置页参数一直"正在加载"。
+  - Root cause: the browser half accessed the Remote namespace through `ctx.get('remote.weaknet')`, but cordis service lookup walks the fiber parent chain — the namespace service is registered in the api-gateway's child fiber and is **invisible to sibling fibers** (verified with a live cordis experiment: sibling/child-fiber services return `undefined`). The official UI packages only work because they consume namespaces mounted by the host-side aggregator via `inject` (root-store dependency resolution).
+  - 根因：浏览器半通过 `ctx.get('remote.weaknet')` 访问 Remote 命名空间，但 cordis 服务查找沿 fiber 父链——命名空间服务注册在 api-gateway 的子 fiber，对兄弟 fiber **不可见**（已用 cordis 实测复现：兄弟/子 fiber 服务返回 `undefined`）。官方 UI 包能用是因为它们经 `inject`（root store 依赖解析）消费宿主聚合器挂载的命名空间。
+  - Fix: the settings page and status dock now call the generic RPC channel directly — `ctx.connection.rpc.call('/api', 'weaknet/<method>', { args })` (the same transport the api-gateway uses internally). The `$mount` contribution stays for gateway discoverability; it is fully decoupled from the UI path.
+  - 修复：设置页与状态条改为直接走通用 RPC 通道 `ctx.connection.rpc.call('/api', 'weaknet/<method>', { args })`（与 api-gateway 内部同款传输）；`$mount` 注册保留供 gateway 发现，与 UI 路径完全解耦。
+
 ## [1.0.3] — 2026-08-16
 
 ### Added / 新增
