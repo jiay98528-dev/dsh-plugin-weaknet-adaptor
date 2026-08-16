@@ -143,6 +143,10 @@ lib/client.js       Browser half (ModuleLoader bundle: settings page + status do
 lib/types/index.d.ts  Type declarations
 ```
 
+## 📜 Changelog / 更新日志
+
+See [CHANGELOG.md](CHANGELOG.md) — 1.0.3 (WiFi icon + settings diagnostics), 1.0.2 (critical WebUI-hang fix), 1.0.1 (`dsh plugin add` support), 1.0.0 (first release).
+
 ## 📄 License / 许可证
 
 MIT — see [LICENSE](LICENSE).
