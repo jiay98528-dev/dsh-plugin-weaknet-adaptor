@@ -1,0 +1,37 @@
+name: Bug report
+description: Report a reproducible weaknet adaptor problem
+title: "[bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please remove secrets, tokens, and private content before posting logs.
+  - type: input
+    id: dsh-version
+    attributes:
+      label: DSH version
+      placeholder: e.g. 0.1.0-rc.6
+    validations:
+      required: true
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Plugin version
+      placeholder: e.g. 1.0.5
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      placeholder: What did you configure, and what happened?
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant browser / host logs
+      placeholder: Paste redacted logs here.
+    validations:
+      required: false
